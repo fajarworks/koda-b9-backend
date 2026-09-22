@@ -20,8 +20,6 @@ func NewUserHandler(service *service.UserService) *UserHandler {
 	}
 }
 
-var Users = []dto.User{}
-
 func (h *UserHandler) Login(ctx *gin.Context) {
 	var form dto.User
 	if err := ctx.ShouldBindWith(&form, binding.JSON); err != nil {
@@ -69,6 +67,7 @@ func (h *UserHandler) Register(ctx *gin.Context) {
 			"success": false,
 			"message": err.Error(),
 		})
+		return
 	}
 
 	if err := h.service.LengthPassword(form); err != nil {
@@ -83,5 +82,5 @@ func (h *UserHandler) Register(ctx *gin.Context) {
 		"success": true,
 		"message": "register berhasil",
 	})
-	Users = append(Users, form)
+	service.Users = append(service.Users, form)
 }

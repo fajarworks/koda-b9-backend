@@ -4,7 +4,6 @@ import (
 	"errors"
 
 	"github.com/fajarworks/koda-b9-backend/dto"
-	// "github.com/fajarworks/koda-b9-backend/model"
 )
 
 type UserService struct {
